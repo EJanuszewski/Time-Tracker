@@ -13,14 +13,10 @@
   </div>
 </div>
 <!-- Temp form that can be moved to an external template -->
-<form name="entryForm" class="entry-form" ng-model="newEntry" ng-submit="newEntryAdd(entryForm.$valid)" novalidate>
+<form name="entryForm" class="entry-form" ng-model="newEntry" ng-submit="newEntryAdd()" novalidate>
 	<input type="text" name="title" placeholder="Title" class="form-control" ng-model="newEntry.title" required />
 	<select class="form-control" ng-model="newEntry.project" required>
-		<option value="Apple">Apple</option>
-		<option value="Orange">Orange</option>
-		<option value="Banana">Banana</option>
-		<option value="Pear">Pear</option>
-		<option value="Plum">Plum</option>
+		<option value="{{client.$id}}" ng-repeat="client in clients">{{client.name}}</option>
 	</select>
 	<textarea name="description" placeholder="Description" class="form-control" rows="2" ng-model="newEntry.description"></textarea>
 	<input class="btn btn-primary btn-xs btn-block" type="submit" value="Add" ng-disabled="entryForm.$invalid" />

@@ -8,37 +8,34 @@
  * Controller of the timeTrackerApp
  */
 angular.module('timeTrackerApp')
-  .controller('CalendarCtrl', function ($scope, $firebaseArray) {
+  .controller('CalendarCtrl', function ($scope, Ref, $firebaseArray) {
 		
     $scope.currentDate = moment().year() + '/' + moment().week();
 
-    var fireRef = new Firebase('https://glaring-fire-2223.firebaseio.com/' + $scope.currentDate);
-
-    $scope.entries = $firebaseArray(fireRef);
-
-    //$scope.on()
-
-    $scope.newEntry = {
-      project: 'Apple'
-    };
+		//Both will need an instance id in future
+    var fbEntries = new Firebase('https://glaring-fire-2223.firebaseio.com/' + $scope.currentDate);
+		var fbClients = new Firebase('https://glaring-fire-2223.firebaseio.com/clients');
+	
+    $scope.entries = $firebaseArray(fbEntries);
+		$scope.clients = $firebaseArray(fbClients);
 
     $scope.days = [];
 	
-    for(var i = 0; i < 7; i ++) {
-      var date = moment().add(i, 'd');//+1 to make Sunday Monday#
-      //$scope.entries.forEach(function(item, index) {
-      //	console.log(item);
-      //})
+		var startOfWeek = moment().startOf('week').add(1, 'd'); //Start Monday
+	
+    for(var i = 0; i < 7; i++) {
+      var date = moment(startOfWeek).add(i, 'd');
       $scope.days.push({
         date: new Date(date),
         entries: []
       });
     }
 		
-    fireRef.on('value', function(data) {
+    fbEntries.on('value', function(data) {
       $scope.days.forEach(function(item) {
         item.entries = [];
-      })
+      });
+			
       data.forEach(function(childData) {
         var val = childData.val();
         //Get the day of the week
@@ -47,7 +44,7 @@ angular.module('timeTrackerApp')
           if(moment(item.date).date() === day) {
             $scope.days[index].entries.push(val);
           }
-        })
+        });
 		  });      
     });
 	

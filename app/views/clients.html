@@ -1,0 +1,23 @@
+<h2>Clients</h2>
+<ul class="list-group">
+	<li ng-repeat="client in clients" class="list-group-item">{{client.name}}</li>
+</ul>
+
+<h3>Add New Project</h3>
+<form name="addProjectForm" ng-submit="addProject($addProject.valid)" novalidate>
+	<div class="form-group">
+		<label>Client</label>
+		<select class="form-control">
+			<option value="{{client.$id}}" ng-repeat="client in clients">{{client.name}}</option>
+		</select>
+	</div>
+	<input type="submit" value="Add" class="btn btn-primary" />
+</form>
+<div class="clear"></div>
+<h3>Add New Client</h3>
+<form name="addClientForm" ng-submit="addClient()" novalidate class="form-inline">
+	<div class="form-group">
+		<input type="text" placeholder="Client name" required ng-model="newClient.name" class="form-control" />
+	</div>
+	<input type="submit" value="Add" class="btn btn-primary" ng-disabled="addClient.$invalid" />
+</form>
