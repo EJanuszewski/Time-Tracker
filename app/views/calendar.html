@@ -1,0 +1,27 @@
+<div id="calendar">
+	<div class="container">
+		<div class="day-container" ng-repeat="day in days" data-day="{{day.date | date:'dd'}}" data-month="{{day.date | date:'MM'}}" data-year="{{day.date | date:'yyyy'}}">
+			<div class="day-title">{{day.date | date:'EEEE dd'}}</div>
+			<div class="day-items">
+				<div class="entry" ng-repeat="entry in day.entries">
+					{{entry.title}}
+				</div>
+				<a class="btn btn-large btn-primary btn-block btn-add" ng-click="addEntry(day.date)">Add new entry</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+  </div>
+</div>
+<!-- Temp form that can be moved to an external template -->
+<form name="entryForm" class="entry-form" ng-model="newEntry" ng-submit="newEntryAdd(entryForm.$valid)" novalidate>
+	<input type="text" name="title" placeholder="Title" class="form-control" ng-model="newEntry.title" required />
+	<select class="form-control" ng-model="newEntry.project" required>
+		<option value="Apple">Apple</option>
+		<option value="Orange">Orange</option>
+		<option value="Banana">Banana</option>
+		<option value="Pear">Pear</option>
+		<option value="Plum">Plum</option>
+	</select>
+	<textarea name="description" placeholder="Description" class="form-control" rows="2" ng-model="newEntry.description"></textarea>
+	<input class="btn btn-primary btn-xs btn-block" type="submit" value="Add" ng-disabled="entryForm.$invalid" />
+</form>
