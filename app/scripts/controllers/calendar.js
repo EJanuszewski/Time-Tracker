@@ -8,8 +8,10 @@
  * Controller of the timeTrackerApp
  */
 angular.module('timeTrackerApp')
-  .controller('CalendarCtrl', function ($scope, Ref, $firebaseArray) {
+  .controller('CalendarCtrl', function ($scope, Ref, $firebaseArray, user) {
 		
+    $scope._userAuthKey = user.token;
+  
     $scope.currentDate = moment().year() + '/' + moment().week();
 
 		//Both will need an instance id in future

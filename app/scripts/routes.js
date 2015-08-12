@@ -62,7 +62,7 @@ angular.module('timeTrackerApp')
         controller: 'MainCtrl'
       })
 
-      .when('/calendar', {
+      .whenAuthenticated('/calendar', {
         templateUrl: 'views/calendar.html',
         controller: 'CalendarCtrl'
       })
@@ -70,7 +70,7 @@ angular.module('timeTrackerApp')
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'
       })
-      .when('/clients', {
+      .whenAuthenticated('/clients', {
         templateUrl: 'views/clients.html',
         controller: 'ClientsCtrl'
       })

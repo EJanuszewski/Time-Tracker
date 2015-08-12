@@ -39,12 +39,12 @@
 
             <ul class="nav navbar-nav">
               <!-- //angularfire -->
-              <li><a ng-href="#/calendar">calendar</a></li>
               <li><a ng-href="#/chat">chat</a></li>
-              <li><a ng-href="#/clients">clients</a></li>
+              <li ng-show-auth=""><a ng-href="#/calendar">calendar</a></li>
+              <li ng-show-auth=""><a ng-href="#/clients">clients</a></li>
               <li>
-              <a ng-hide-auth="" href="#/login">log in</a>
-              <a ng-show-auth="" href="#/account">account</a>
+              <a ng-hide-auth="" href="#/login" class="pull-right">log in</a>
+              <a ng-show-auth="" href="#/account"  class="pull-right">account</a>
             </li>
 
             </ul>

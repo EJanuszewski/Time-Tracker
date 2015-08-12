@@ -9,6 +9,8 @@
 angular.module('timeTrackerApp')
   .controller('AccountCtrl', function ($scope, user, Auth, Ref, $firebaseObject, $timeout) {
     $scope.user = user;
+  console.log(Auth);
+  console.log(Auth());
     $scope.logout = function() { Auth.$unauth(); };
     $scope.messages = [];
     var profile = $firebaseObject(Ref.child('users/'+user.uid));
